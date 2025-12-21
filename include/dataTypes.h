@@ -1,0 +1,17 @@
+#ifndef CDL_LIBRARY_DATATYPES_H
+#define CDL_LIBRARY_DATATYPES_H
+
+#define MIN_CAPACITY 24
+
+typedef enum {
+  TYPE_SHORT,
+  TYPE_INT,
+  TYPE_LONG,
+  TYPE_U_INT,
+  TYPE_FLOAT,
+  TYPE_DOUBLE,
+  TYPE_L_DOUBLE,
+} DataType;
+
+#endif // CDL_LIBRARY_DATATYPES_H
+

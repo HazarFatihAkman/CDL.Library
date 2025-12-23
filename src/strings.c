@@ -29,3 +29,15 @@ void _pop_s(strings *l) {
   l->items = realloc(l->items, l->capacity*sizeof(*l->items));
 }
 
+void _remove_s(int index, strings *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items[i] = l->items[i + 1];
+  }
+
+  --l->count;
+  decapacity(l);
+
+  l->items[l->count] = NULL;
+  l->items = realloc(l->items, l->capacity*sizeof(*l->items));
+}
+

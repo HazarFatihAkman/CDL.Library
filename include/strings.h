@@ -17,4 +17,8 @@ void _push_s(const char *x, strings *l);
 void _pop_s(strings *l);
 #define str_pop(l) _pop_s(l)
 
+// remove
+void _remove_s(int i, strings *l);
+#define str_remove(i, l) _remove_s(i, l)
+
 #endif // CDL_LIBRARY_STRINGS_H

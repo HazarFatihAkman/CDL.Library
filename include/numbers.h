@@ -10,7 +10,7 @@ typedef enum {
   UINT,
   DOUBLE,
   LDOUBLE,
-  FLOAT
+  FLOAT,
 } data_types_e;
 
 typedef union {
@@ -52,6 +52,10 @@ void _push_f     (float x, numbers *l);
 // pop
 void _n_pop     (numbers *l);
 #define n_pop(l) _n_pop(l)
+
+// remove
+void _n_remove  (int i, numbers *l);
+#define n_remove(i, l) _n_remove(i, l)
 
 #endif // CDL_LIBRARY_NUMBERS_H
 

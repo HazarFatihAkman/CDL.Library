@@ -1,6 +1,7 @@
 #include "../include/numbers.h"
 #include "../include/utils.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 static void recapacity(numbers *l) {
@@ -8,9 +9,13 @@ static void recapacity(numbers *l) {
   else l->capacity *= 2;
 }
 
-static void decapacity(numbers *l) {
-  int mod_count = l->count % MIN_CAPACITY;
-  if (mod_count >= MIN_CAPACITY) l->capacity -= MIN_CAPACITY;
+static int decapacity(numbers *l) {
+  if (l->count % MIN_CAPACITY > MIN_CAPACITY) {
+    l->capacity -= MIN_CAPACITY;
+    return 1;
+  }
+
+  return 0;
 }
 
 void _push_short(short x, numbers *l) {
@@ -90,46 +95,143 @@ void _push_f(float x, numbers *l) {
   l->items.floats[l->count++] = x;
 }
 
-static void pop_short(numbers *l) {
-  l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+static void _pop_short(numbers *l) {
+  l->items.shorts[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
 }
 
-static void pop_int(numbers *l) {
-  l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
+static void _pop_int(numbers *l) {
+  l->items.ints[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
 }
 
-static void pop_long(numbers *l) {
-  l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+static void _pop_long(numbers *l) {
+  l->items.longs[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
 }
 
-static void pop_uint(numbers *l) {
-  l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+static void _pop_uint(numbers *l) {
+  l->items.u_ints[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
 }
 
-static void pop_d(numbers *l) {
-  l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+static void _pop_d(numbers *l) {
+  l->items.doubles[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
 }
 
-static void pop_ld(numbers *l) {
-  l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+static void _pop_ld(numbers *l) {
+  l->items.l_doubles[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
 }
 
-static void pop_f(numbers *l) {
-  l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+static void _pop_f(numbers *l) {  
+  l->items.floats[l->count] = 0;
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
 }
 
 void _n_pop(numbers *l) {
-  --l->count;
-  decapacity(l);
-
   switch (l->type) {
-    case SHORT:   pop_short(l);
-    case INT:     pop_int(l);
-    case LONG:    pop_long(l);
-    case UINT:    pop_uint(l);
-    case DOUBLE:  pop_d(l);
-    case LDOUBLE: pop_ld(l);
-    case FLOAT:   pop_f(l);
+    case SHORT:   _pop_short(l); break;
+    case INT:     _pop_int(l);   break;
+    case LONG:    _pop_long(l);  break;
+    case UINT:    _pop_uint(l);  break;
+    case DOUBLE:  _pop_d(l);     break;
+    case LDOUBLE: _pop_ld(l);    break;
+    case FLOAT:   _pop_f(l);     break;
+    default: break;
+  }
+}
+
+// _r_n abbreviation = remove_number
+static void _r_n_short(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) {
+      l->items.shorts[i] = l->items.shorts[i + 1]; 
+    }
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+}
+
+static void _r_n_int(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items.ints[i] = l->items.ints[i + 1];
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.ints = realloc(l->items.shorts, l->capacity*sizeof(*l->items.ints));
+}
+
+static void _r_n_long(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items.longs[i] = l->items.longs[i + 1];
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+}
+
+static void _r_n_uint(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items.u_ints[i] = l->items.u_ints[i + 1];
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+}
+
+static void _r_n_d(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items.doubles[i] = l->items.doubles[i + 1];
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+}
+
+static void _r_n_ld(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items.l_doubles[i] = l->items.l_doubles[i + 1];
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+}
+
+static void _r_n_f(int index, numbers *l) {
+  for (int i = 0; i < l->count; ++i) {
+    if (index <= i) l->items.floats[i] = l->items.floats[i + 1];
+  }
+
+  --l->count;
+  if (decapacity(l) == 1) l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+}
+
+void _n_remove(int i, numbers *l) {
+  switch (l->type) {
+    case SHORT:   _r_n_short(i, l); break;
+    case INT:     _r_n_int(i, l);   break;
+    case LONG:    _r_n_long(i, l);  break;
+    case UINT:    _r_n_uint(i, l);  break;
+    case DOUBLE:  _r_n_d(i, l);     break;
+    case LDOUBLE: _r_n_ld(i, l);    break;
+    case FLOAT:   _r_n_f(i, l);     break;
     default: break;
   }
 }

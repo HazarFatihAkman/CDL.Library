@@ -1,11 +1,21 @@
+
 # CDL.Library
-That's a general dynamic array library that let's you to push/pop/remove/read and etc. in C
+That's a general dynamic array library that let's you to push/pop/remove and etc. in C
 
 # Features
 - [Numbers](#numbers)
 - [Strings](#strings)
 
 ## numbers
+
+supports
+ - sort int
+ - int
+ - long
+ - unsigned int
+ - double
+ - long double
+ - float
 
 dependency
 
@@ -99,4 +109,3 @@ str_push("Github", &n_list);
 
 str_remove(1, &n_list);
 ```
-

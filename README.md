@@ -42,6 +42,19 @@ n_push(2, &n_list);
 n_pop(&n_list);
 ```
 
+remove
+```c
+// method definition
+n_remove(i, l);
+
+// example usage
+numbers n_list = {0};
+n_push(10, &n_list);
+n_push(20, &n_list);
+
+n_remove(2, &n_list);
+```
+
 ## strings
 
 dependency
@@ -72,5 +85,18 @@ str_push("Hazar Fatih Akman", &str_list);
 str_push("Github", &str_list);
 
 str_pop(&str_list);
+```
+
+remove
+```c
+// method definition
+str_remove(i, l);
+
+// example usage
+strings str_list = {0};
+str_push("Hazar Fatih Akman", &n_list);
+str_push("Github", &n_list);
+
+str_remove(1, &n_list);
 ```
 

@@ -3,6 +3,16 @@
 
 #include <sys/types.h>
 
+typedef enum {
+  SHORT,
+  INT,
+  LONG,
+  UINT,
+  DOUBLE,
+  LDOUBLE,
+  FLOAT
+} data_types_e;
+
 typedef union {
   short int    *shorts;
   int          *ints;
@@ -14,29 +24,34 @@ typedef union {
 } item_types;
 
 typedef struct {
-  item_types items;
-  size_t count;
-  size_t capacity;
+  item_types   items;
+  size_t       count;
+  size_t       capacity;
+  data_types_e type;
 } numbers;
 
-// pushing
-void push_short (short int x, numbers *l);
-void push_int   (int x, numbers *l);
-void push_long  (long x, numbers *l);
-void push_uint  (unsigned int x, numbers *l);
-void push_d     (double x, numbers *l);
-void push_ld    (long double x, numbers *l);
-void push_f     (float x, numbers *l);
+// push
+void _push_short (short int x, numbers *l);
+void _push_int   (int x, numbers *l);
+void _push_long  (long x, numbers *l);
+void _push_uint  (unsigned int x, numbers *l);
+void _push_d     (double x, numbers *l);
+void _push_ld    (long double x, numbers *l);
+void _push_f     (float x, numbers *l);
 
 #define n_push(x, l) _Generic((x), \
-    short int:    push_short, \
-    int:          push_int,   \
-    long:         push_long,  \
-    unsigned int: push_uint,  \
-    double:       push_d,     \
-    long double:  push_ld,    \
-    float:        push_f      \
+    short int:    _push_short, \
+    int:          _push_int,   \
+    long:         _push_long,  \
+    unsigned int: _push_uint,  \
+    double:       _push_d,     \
+    long double:  _push_ld,    \
+    float:        _push_f      \
 )(x, l)
 
+// pop
+void _n_pop     (numbers *l);
+#define n_pop(l) _n_pop(l)
+
 #endif // CDL_LIBRARY_NUMBERS_H
- 
+

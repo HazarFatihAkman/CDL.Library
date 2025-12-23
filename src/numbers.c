@@ -8,7 +8,7 @@ static void recapacity(numbers *l) {
   else l->capacity *= 2;
 }
 
-void add_short(short x, numbers *l) {
+void push_short(short x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
@@ -17,7 +17,7 @@ void add_short(short x, numbers *l) {
   l->items.shorts[l->count++] = x;
 }
 
-void add_int(int x, numbers *l) {
+void push_int(int x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
@@ -26,7 +26,7 @@ void add_int(int x, numbers *l) {
   l->items.ints[l->count++] = x;
 }
 
-void add_long(long x, numbers *l) {
+void push_long(long x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
@@ -35,7 +35,7 @@ void add_long(long x, numbers *l) {
   l->items.longs[l->count++] = x;
 }
 
-void add_uint(unsigned int x, numbers *l) {
+void push_uint(unsigned int x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
@@ -44,7 +44,7 @@ void add_uint(unsigned int x, numbers *l) {
   l->items.u_ints[l->count++] = x;
 }
 
-void add_d(double x, numbers *l) {
+void push_d(double x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
@@ -53,7 +53,7 @@ void add_d(double x, numbers *l) {
   l->items.doubles[l->count++] = x;
 }
 
-void add_ld(long double x, numbers *l) {
+void push_ld(long double x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
@@ -62,7 +62,7 @@ void add_ld(long double x, numbers *l) {
   l->items.l_doubles[l->count++] = x;
 }
 
-void add_f(float x, numbers *l) {
+void push_f(float x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));

@@ -9,8 +9,8 @@ typedef struct {
   size_t capacity;
 } strings;
 
-void add_s(const char *x, strings *l);
+void push_s(const char *x, strings *l);
 
-#define str_push(x, l) add_s(x, l)
+#define str_push(x, l) push_s(x, l)
 
 #endif // CDL_LIBRARY_STRINGS_H

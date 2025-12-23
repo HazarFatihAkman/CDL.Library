@@ -7,7 +7,7 @@ static void recapacity(strings *l) {
   else l->capacity *= 2;
 }
 
-void add_s(const char *x, strings *l) {
+void push_s(const char *x, strings *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items = realloc(l->items, l->capacity*sizeof(*l->items));

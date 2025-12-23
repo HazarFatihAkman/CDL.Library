@@ -3,8 +3,8 @@
 That's a general dynamic array library that let's you to push/pop/remove/read and etc. in C
 
 # Features
-[Numbers](#numbers)
-[Strings](#strings)
+- [Numbers](#numbers)
+- [Strings](#strings)
 
 ## numbers
 

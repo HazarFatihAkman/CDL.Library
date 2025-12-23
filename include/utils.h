@@ -1,5 +1,7 @@
 #ifndef CDL_LIBRARY_UTILS_H
 #define CDL_LIBRARY_UTILS_H
 
+#define MIN_CAPACITY 12 
+
 #endif // CDL_LIBRARY_UTILS_H
 

@@ -1,4 +1,5 @@
 #include "../include/numbers.h"
+#include "../include/utils.h"
 
 #include <stdlib.h>
 

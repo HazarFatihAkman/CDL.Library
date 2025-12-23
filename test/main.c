@@ -1,5 +1,5 @@
 #include "../include/numbers.h"
-#include "../include/utils.h"
+#include "../include/strings.h"
 
 #include <stdio.h>
 
@@ -25,5 +25,11 @@ int main() {
   printf("Long \n");
   for (size_t i = 0; i < l3.count; ++i) printf("%lu : %zu\n", l3.items.longs[i], i);
 
+  strings ls = {0};
+  const char *strval = "string";
+  str_push(strval, &ls);
+  str_push("string 2", &ls);
+  printf("String \n");
+  for (size_t i = 0; i < ls.count; ++i) printf("%s : %zu\n", ls.items[i], i);
   return 0;
 }

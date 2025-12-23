@@ -2,7 +2,6 @@
 #define CDL_LIBRARY_NUMBERS_H
 
 #include <sys/types.h>
-#include "dataTypes.h"
 
 typedef union {
   short int    *shorts;

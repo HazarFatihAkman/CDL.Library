@@ -21,7 +21,11 @@ static int decapacity(numbers *l) {
 void _push_short(short x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
-    l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
+    l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+    if (l->items.shorts == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != SHORT) l->type = SHORT;
@@ -33,6 +37,10 @@ void _push_int(int x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
+    if (l->items.ints == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != INT) l->type = INT;
@@ -44,6 +52,10 @@ void _push_long(long x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+    if (l->items.longs == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != LONG) l->type = LONG;
@@ -55,6 +67,10 @@ void _push_uint(unsigned int x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+    if (l->items.u_ints == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != UINT) l->type = UINT;
@@ -66,6 +82,10 @@ void _push_d(double x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+    if (l->items.doubles == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != DOUBLE) l->type = DOUBLE;
@@ -77,6 +97,10 @@ void _push_ld(long double x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+    if (l->items.l_doubles == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != LDOUBLE) l->type = LDOUBLE;
@@ -88,6 +112,10 @@ void _push_f(float x, numbers *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+    if (l->items.floats == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   if (l->type != FLOAT) l->type = FLOAT;
@@ -99,49 +127,91 @@ static void _pop_short(numbers *l) {
   l->items.shorts[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+  if (decapacity(l) == 1) {
+    l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+    if (l->items.shorts == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _pop_int(numbers *l) {
   l->items.ints[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
+  if (decapacity(l) == 1) {
+    l->items.ints = realloc(l->items.ints, l->capacity*sizeof(*l->items.ints));
+    if (l->items.ints == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _pop_long(numbers *l) {
   l->items.longs[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+  if (decapacity(l) == 1) {
+    l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+    if (l->items.longs == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _pop_uint(numbers *l) {
   l->items.u_ints[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+  if (decapacity(l) == 1) {
+    l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+    if (l->items.u_ints == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _pop_d(numbers *l) {
   l->items.doubles[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+  if (decapacity(l) == 1) {
+    l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+    if (l->items.doubles == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _pop_ld(numbers *l) {
   l->items.l_doubles[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+  if (decapacity(l) == 1) {
+    l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+    if (l->items.floats == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _pop_f(numbers *l) {  
   l->items.floats[l->count] = 0;
 
   --l->count;
-  if (decapacity(l) == 1) l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+  if (decapacity(l) == 1) {
+    l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+    if (l->items.floats == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 void _n_pop(numbers *l) {
@@ -166,7 +236,13 @@ static void _r_n_short(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+  if (decapacity(l) == 1) {
+    l->items.shorts = realloc(l->items.shorts, l->capacity*sizeof(*l->items.shorts));
+    if (l->items.shorts == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _r_n_int(int index, numbers *l) {
@@ -175,7 +251,13 @@ static void _r_n_int(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.ints = realloc(l->items.shorts, l->capacity*sizeof(*l->items.ints));
+  if (decapacity(l) == 1) {
+    l->items.ints = realloc(l->items.shorts, l->capacity*sizeof(*l->items.ints));
+    if (l->items.ints == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _r_n_long(int index, numbers *l) {
@@ -184,7 +266,13 @@ static void _r_n_long(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+  if (decapacity(l) == 1) {
+    l->items.longs = realloc(l->items.longs, l->capacity*sizeof(*l->items.longs));
+    if (l->items.longs == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _r_n_uint(int index, numbers *l) {
@@ -193,7 +281,13 @@ static void _r_n_uint(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+  if (decapacity(l) == 1) {
+    l->items.u_ints = realloc(l->items.u_ints, l->capacity*sizeof(*l->items.u_ints));
+    if (l->items.u_ints == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _r_n_d(int index, numbers *l) {
@@ -202,7 +296,13 @@ static void _r_n_d(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+  if (decapacity(l) == 1) {
+    l->items.doubles = realloc(l->items.doubles, l->capacity*sizeof(*l->items.doubles));
+    if (l->items.doubles == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _r_n_ld(int index, numbers *l) {
@@ -211,7 +311,13 @@ static void _r_n_ld(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+  if (decapacity(l) == 1) {
+    l->items.l_doubles = realloc(l->items.l_doubles, l->capacity*sizeof(*l->items.l_doubles));
+    if (l->items.l_doubles == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 static void _r_n_f(int index, numbers *l) {
@@ -220,7 +326,13 @@ static void _r_n_f(int index, numbers *l) {
   }
 
   --l->count;
-  if (decapacity(l) == 1) l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+  if (decapacity(l) == 1) {
+    l->items.floats = realloc(l->items.floats, l->capacity*sizeof(*l->items.floats));
+    if (l->items.floats == NULL) {
+      perror("Error");
+      return;
+    }
+  }
 }
 
 void _n_remove(int i, numbers *l) {

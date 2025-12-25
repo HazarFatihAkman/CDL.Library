@@ -1,6 +1,8 @@
 #include "../include/strings.h"
 #include "../include/utils.h"
+
 #include <stdlib.h>
+#include <errno.h>
 
 static void recapacity(strings *l) {
   if (l->capacity == 0) l->capacity = MIN_CAPACITY;
@@ -16,6 +18,10 @@ void _push_s(const char *x, strings *l) {
   if (l->count >= l->capacity) {
     recapacity(l);
     l->items = realloc(l->items, l->capacity*sizeof(*l->items));
+    if (l->items == NULL) {
+      perror("Error");
+      return;
+    }
   }
 
   l->items[l->count++] = x;
@@ -27,6 +33,10 @@ void _pop_s(strings *l) {
 
   l->items[l->count] = NULL;
   l->items = realloc(l->items, l->capacity*sizeof(*l->items));
+  if (l->items == NULL) {
+    perror("Error");
+    return;
+  }
 }
 
 void _remove_s(int index, strings *l) {
@@ -39,5 +49,9 @@ void _remove_s(int index, strings *l) {
 
   l->items[l->count] = NULL;
   l->items = realloc(l->items, l->capacity*sizeof(*l->items));
+  if (l->items == NULL) {
+    perror("Error");
+    return;
+  }
 }
 

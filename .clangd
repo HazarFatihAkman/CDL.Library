@@ -1,4 +1,4 @@
 CompileFlags:
-  Compiler: C:/msys64/mingw64/bin/gcc.exe
+  Compiler: 
   Add:
-    - --target=x86_64-w64-mingw32
+    - --target=x86_64-pc-linux-gnu

@@ -2,6 +2,7 @@
 #include "../include/utils.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <errno.h>
 
 static void recapacity(strings *l) {

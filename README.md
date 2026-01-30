@@ -4,7 +4,11 @@ That's a general dynamic array library that let's you to push/pop/remove and etc
 
 # Features
 - [Numbers](#numbers)
-- [Strings](#strings)
+- [strings](#strings)
+
+```li_t``` can be used for anything but numbers cause there's more strict rules for number types (int, float, decimal and etc.).
+
+String example can be used for keyValuePair or anything else cause ```li_t``` items's ```void**```. So you push pointers to the list, not to copy the exact value of pointers.
 
 ## numbers
 
@@ -69,43 +73,45 @@ n_remove(2, &n_list);
 
 dependency
 ```c
-#include "lib/cdl/strings.h"
+#include "lib/cdl/listInterface.h"
 ```
 
 push
 ```c
-strings str_list = {0};
+typedef li_t strings;
+strings l = {0};
 
 // push the value directly
-str_push("Hazar Fatih Akman", &str_list);
+push_v((void*)"Hazar Fatih Akman", &str_list);
 
 // push the property
 const char *str_val = "Github";
-str_push(str_val, &str_list);
+push_v((void*)str_val, &str_list);
 ```
 
 pop
 ```c
 // method definition
-str_pop(l);
+pop_v(l);
 
 // example usage
 strings str_list = {0};
-str_push("Hazar Fatih Akman", &str_list);
-str_push("Github", &str_list);
+push_v((void*)"Hazar Fatih Akman", &str_list);
+push_v((void*)"Github", &str_list);
 
-str_pop(&str_list);
+pop_v(&str_list);
 ```
 
 remove
 ```c
 // method definition
-str_remove(i, l);
+remove_at(i, l);
 
 // example usage
 strings str_list = {0};
-str_push("Hazar Fatih Akman", &n_list);
-str_push("Github", &n_list);
+push_v((void*)"Hazar Fatih Akman", &n_list);
+push_v((void*)"Github", &n_list);
 
-str_remove(1, &n_list);
+remove_at(1, &n_list);
 ```
+
